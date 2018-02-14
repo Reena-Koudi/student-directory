@@ -7,8 +7,14 @@ students = []
 name = gets.chomp
 #while the name is not empty, repeat this code
 while !name.empty? do
-#add student hash to the array
-students << {name: name, cohort: :november}
+    puts "Enter hobby"
+    hobby = gets.chomp
+    puts "Enter Country of Birth"
+    country_of_birth = gets.chomp
+    puts "Enter height"
+    height = gets.chomp.to_i
+#add student details hash to the array
+students << {name: name, hobby: hobby, country_of_birth: country_of_birth, height: height, cohort: :november}
     puts "Now we have #{students.count} students"
     # get another name from the user
     name = gets.chomp
@@ -23,7 +29,7 @@ puts "---------"
 end
 def print(students)
 students.each do|student|
-puts "#{student[:name]} (#{student[:cohort]} cohort)"
+puts "#{student[:name]} #{student[:hobby]} #{student[:country_of_birth]} #{student[:height]} (#{student[:cohort]} cohort)"
 end
 end
 def print_footer(students)
