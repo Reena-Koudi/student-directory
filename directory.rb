@@ -22,8 +22,10 @@ puts "The students of Villains Academy"
 puts "---------"
 end
 def print(students)
-students.each do|student|
-puts "#{student[:name]} (#{student[:cohort]} cohort)"
+index = 0
+while index < students.count
+puts "#{index + 1}. #{students[index][:name]} (#{students[index][:cohort]} cohort)"
+index += 1
 end
 end
 def print_footer(students)
