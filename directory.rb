@@ -23,7 +23,7 @@ puts "---------"
 end
 def print(students)
 students.each do|student|
-puts "#{student[:name]} (#{student[:cohort]} cohort)"
+puts "#{student[:name].center(20)} (#{student[:cohort]} cohort)"
 end
 end
 def print_footer(students)
