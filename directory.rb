@@ -1,18 +1,42 @@
-def input_students
-    puts "Please enter the name of the students"
-    puts "To finish, just hit return twice"
-#create an empty array
-students = []
-#get the first name
-name = gets.chomp
-#while the name is not empty, repeat this code
-while !name.empty? do
-#add student hash to the array
-students << {name: name, cohort: :november}
-    puts "Now we have #{students.count} students"
-    # get another name from the user
-    name = gets.chomp
+def input_name
+  puts "please enter the name of the student"
+  name = gets.chomp
+  name == "" ? nil : name
 end
+
+def input_cohort
+  while true do
+    puts "Enter the month of the cohort(1 to 12)"
+    cohort = gets.chomp.to_i
+    cohort_months = {
+     1 => :January,
+     2 => :Febuary,
+     3 => :March,
+     4 => :April,
+     5 => :May,
+     6 => :June,
+     7 => :July,
+     8 => :August,
+     9 => :September,
+     10 => :October,
+     11 => :November,
+     12 => :December
+    }
+    if cohort_months.has_key?(cohort)
+      return cohort_months[cohort]
+    end
+   puts "Please enter a month between 1 to 12"
+  end
+end
+def input_students
+  students = []
+  while true do
+  name = input_name
+  break if name == nil
+  cohort = input_cohort
+  students << {name: name, cohort: cohort}
+end
+puts "Now we have #{students.count} students"
   # return the array of students
   students
 end
@@ -23,7 +47,7 @@ puts "---------"
 end
 def print(students)
 students.each do|student|
-puts "#{student[:name].center(20)} (#{student[:cohort]} cohort)"
+puts "#{student[:name]} (#{student[:cohort]} cohort)"
 end
 end
 def print_footer(students)
