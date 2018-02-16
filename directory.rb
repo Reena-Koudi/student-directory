@@ -1,13 +1,13 @@
 def input_name
   puts "please enter the name of the student"
-  name = gets.chomp
+  name = gets.gsub(/[\n]/,'')
   name == "" ? nil : name
 end
 
 def input_cohort
   while true do
     puts "Enter the month of the cohort(1 to 12)"
-    cohort = gets.chomp.to_i
+    cohort = gets.gsub(/[\n]/,'').to_i
     cohort_months = {
      1 => :January,
      2 => :February,
