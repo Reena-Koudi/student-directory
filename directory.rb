@@ -1,13 +1,13 @@
 def input_name
   puts "please enter the name of the student"
-  name = gets.gsub(/[\n]/,'')
+  name = gets.chomp
   name == "" ? nil : name
 end
 
 def input_cohort
   while true do
     puts "Enter the month of the cohort(1 to 12)"
-    cohort = gets.gsub(/[\n]/,'').to_i
+    cohort = gets.chomp.to_i
     cohort_months = {
      1 => :January,
      2 => :February,
@@ -45,18 +45,24 @@ def print_header
 puts "The students of Villains Academy"
 puts "---------"
 end
+
+
 def print(students)
+    if students.count >= 1
 students.each do|student|
 puts "#{student[:name]} (#{student[:cohort]} cohort)"
 end
 end
+end
 
 def print_footer(students)
+    if students.count >= 1
     if students.count == 1
         puts "Overall, we have #{students.count} great student"
     else
         puts "Overall, we have #{students.count} great students"
     end    
+end
 end
 #nothing happens until we call the methods
 students = input_students
