@@ -10,7 +10,7 @@ def input_cohort
     cohort = gets.chomp.to_i
     cohort_months = {
      1 => :January,
-     2 => :Febuary,
+     2 => :February,
      3 => :March,
      4 => :April,
      5 => :May,
@@ -50,6 +50,18 @@ students.each do|student|
 puts "#{student[:name]} (#{student[:cohort]} cohort)"
 end
 end
+
+def print_by_cohort(students)
+  cohorts = students.map { |student| student[:cohort] }.uniq
+# determine membership of each cohort
+  cohorts.each do |cohort|
+    puts "Students in #{cohort} cohort:"
+    students.each do |student|
+    puts student[:name] if student[:cohort] == cohort
+    end
+   end
+ end
+
 def print_footer(students)
 puts "Overall, we have #{students.count} great students"
 end
@@ -58,3 +70,4 @@ students = input_students
 print_header
 print(students)
 print_footer(students)
+print_by_cohort(students)
