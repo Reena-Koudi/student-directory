@@ -32,19 +32,49 @@ def process(selection)
   end
 end
 
+def input_name
+   puts "please enter the name of the student"
+   name = STDIN.gets.chomp
+   name == "" ? nil : name
+end
+
+def input_cohort
+   while true do
+     puts "please enter the cohort(number of the month) of the students"
+     cohort = gets.chomp.to_i
+     cohort_months = {
+       1 => :January,
+       2 => :February,
+       3 => :March,
+       4 => :April,
+       5 => :May,
+       6 => :June,
+       7 => :July,
+       8 => :August,
+       9 => :September,
+       10 => :October,
+       11 => :November,
+       12 => :December
+     }
+     if cohort_months.has_key?(cohort)
+       return cohort_months[cohort]
+     end
+     puts "Please enter a month between 1 to 12"
+   end
+end
+ 
+def add_students(name, cohort)
+    @students << {name: name, cohort: cohort}
+end
+
 def input_students
-  puts "Please enter the names of the students"
-  puts "To finish, just hit return twice"
-  # get the first name
-  name = STDIN.gets.chomp
-  # while the name is not empty, repeat this code
-  while !name.empty? do
-    # add the student hash to the array
-    @students << {name: name, cohort: :november}
-    puts "Now we have #{@students.count} students"
-    # get another name from the user
-    name = STDIN.gets.chomp
-  end
+   while true do
+     name = input_name
+     break if name == nil
+     cohort = input_cohort
+     add_students(name, cohort)
+   end
+   puts "Now we have #{@students.count} students"
 end
 
 def show_students
@@ -84,7 +114,7 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
   name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
+    add_students(name, cohort.to_sym)
   end
   file.close
 end
