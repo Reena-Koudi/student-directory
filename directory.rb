@@ -34,6 +34,7 @@ end
 
 def input_name
    puts "please enter the name of the student"
+    puts "To finish, just hit return twice"
    name = STDIN.gets.chomp
    name == "" ? nil : name
 end
@@ -64,20 +65,22 @@ def input_cohort
 end
  
 def add_students(name, cohort)
-    @students << {name: name, cohort: cohort}
+    @students << {name: name, cohort: cohort.to_sym}
 end
 
 def input_students
-   while true do
-     name = input_name
-     break if name == nil
-     cohort = input_cohort
-     add_students(name, cohort)
-   end
-   puts "Now we have #{@students.count} students"
+  puts "You are in 1. 'Input the students'"
+  while true do
+    name = input_name
+    break if name == nil
+    cohort = input_cohort
+    add_students(name, cohort)
+  end
+    puts "Now we have #{@students.count} students"
 end
 
 def show_students
+  puts "You are in '2. Show the students'"
   print_header
   print_student_list
   print_footer
@@ -99,6 +102,7 @@ def print_footer
 end
 
 def save_students
+  puts "You are now in '3. Save the list to students.csv'"
   # open the file for writing
   file = File.open("students.csv", "w")
   # iterate over the array of students
@@ -111,10 +115,11 @@ def save_students
 end
 
 def load_students(filename = "students.csv")
+  puts "You are now in '4. Load the list from students.csv'" 
   file = File.open(filename, "r")
   file.readlines.each do |line|
   name, cohort = line.chomp.split(',')
-    add_students(name, cohort.to_sym)
+    add_students(name, cohort)
   end
   file.close
 end
